@@ -2,6 +2,8 @@
 #include <QToolBar>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QGraphicsPixmapItem>
+#include "profiler.h"
 
 Carex::Carex ()
 {
@@ -19,6 +21,13 @@ Carex::~Carex ()
 
 void Carex::Rebuild ()
 {
+	Scene_.clear ();
+
+	auto item = Scene_.addPixmap (QPixmap::fromImage (Image_));
+	item->setTransformationMode (Qt::SmoothTransformation);
+	Ui_.FullView_->fitInView (item);
+
+	Profiler p { Image_ };
 }
 
 void Carex::openFile ()

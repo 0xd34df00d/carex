@@ -8,8 +8,9 @@ include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 set(CMAKE_AUTOMOC TRUE)
 
 set(SRCS
-	carex.cpp
 	main.cpp
+	carex.cpp
+	profiler.cpp
 	)
 set(FORMS
 	carex.ui

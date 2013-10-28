@@ -1,0 +1,4 @@
+[Project]
+Name=carex
+Manager=KDevCMakeManager
+VersionControl=kdevgit

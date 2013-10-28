@@ -1,14 +1,22 @@
-#ifndef carex_H
-#define carex_H
+#pragma once
 
-#include <QtGui/QMainWindow>
+#include <QMainWindow>
+#include "ui_carex.h"
 
-class carex : public QMainWindow
+class Carex : public QMainWindow
 {
-Q_OBJECT
-public:
-    carex();
-    virtual ~carex();
-};
+	Q_OBJECT
 
-#endif // carex_H
+	Ui::Carex Ui_;
+
+	QImage Image_;
+
+	QGraphicsScene Scene_;
+public:
+	Carex ();
+	virtual ~Carex ();
+private:
+	void Rebuild ();
+private slots:
+	void openFile ();
+};

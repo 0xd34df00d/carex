@@ -40,8 +40,6 @@ Profiler::Profiler (const QImage& srcImg)
 
 	Mid_ = (MaxV_ - MinV_) / 2;
 
-	qDebug () << "V:" << MinV_ << MaxV_;
-
 	int edgeCount = 0;
 	for (int i = 0; i < Image_.height (); ++i)
 	{

@@ -25,7 +25,7 @@ public:
 	bool eventFilter (QObject *obj, QEvent *e)
 	{
 		if (Item_ && e->type () == QEvent::Resize)
-			static_cast<QGraphicsView*> (obj)->fitInView (Item_);
+			static_cast<QGraphicsView*> (obj)->fitInView (Item_, Qt::KeepAspectRatio);
 
 		return QObject::eventFilter (obj, e);
 	}
@@ -97,7 +97,7 @@ void Carex::rebuild ()
 
 	auto item = Scene_.addPixmap (QPixmap::fromImage (Image_));
 	item->setTransformationMode (Qt::SmoothTransformation);
-	Ui_.FullView_->fitInView (item);
+	Ui_.FullView_->fitInView (item, Qt::KeepAspectRatio);
 	ResizeFitter_->SetItem (item);
 
 	const auto& area = Scene_.selectionArea ().boundingRect ();

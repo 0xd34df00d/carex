@@ -21,7 +21,9 @@ namespace
 
 Profiler::Profiler (const QImage& srcImg)
 : Image_ (srcImg.convertToFormat (QImage::Format_ARGB32_Premultiplied))
-, Stats_ (2 * Radius + 1)
+, Avg_ (2 * Radius + 1)
+, MaxVals_ (2 * Radius + 1)
+, MinVals_ (2 * Radius + 1, 255)
 {
 	for (int i = 0; i < Image_.height (); ++i)
 	{
@@ -78,17 +80,24 @@ Profiler::Profiler (const QImage& srcImg)
 				std::reverse (vec.begin (), vec.end ());
 
 			for (int i = 0; i < 2 * Radius + 1; ++i)
-				Stats_ [i] += vec [i];
+			{
+				Avg_ [i] += vec [i];
+				MaxVals_ [i] = std::max (MaxVals_ [i], vec [i]);
+				MinVals_ [i] = std::min (MinVals_ [i], vec [i]);
+			}
 		}
 	}
 
+	if (!edgeCount)
+		return;
+
 	for (int i = 0; i < 2 * Radius + 1; ++i)
-		Stats_ [i] /= static_cast<double> (edgeCount);
+		Avg_ [i] /= static_cast<double> (edgeCount);
 }
 
 Stats Profiler::operator() () const
 {
-	return { Stats_, MinV_, MaxV_ };
+	return { Avg_, MinVals_, MaxVals_, MinV_, MaxV_ };
 }
 
 int Profiler::FindEdge (const uchar *scanline, int start) const

@@ -8,7 +8,9 @@ class QImage;
 
 struct Stats
 {
-	std::vector<double> Stats_;
+	std::vector<double> Avg_;
+	std::vector<uint8_t> MaxVals_;
+	std::vector<uint8_t> MinVals_;
 
 	uint8_t MinV_;
 	uint8_t MaxV_;
@@ -21,7 +23,8 @@ class Profiler
 	uint8_t Mid_ = 0;
 
 	const QImage Image_;
-	std::vector<double> Stats_;
+	std::vector<double> Avg_;
+	std::vector<uint8_t> MaxVals_, MinVals_;
 public:
 	Profiler (const QImage&);
 

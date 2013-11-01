@@ -24,8 +24,7 @@ class Carex : public QMainWindow
 	QwtPlotCurve * const MaxCurve_;
 public:
 	Carex ();
-private:
-	void Rebuild ();
 private slots:
+	void rebuild ();
 	void openFile ();
 };

@@ -41,6 +41,11 @@ Carex::Carex ()
 	Ui_.FullView_->setScene (&Scene_);
 	Ui_.FullView_->installEventFilter (new ResizeEventFilter (Ui_.FullView_));
 
+	connect (Ui_.FullView_,
+			SIGNAL (selectionChanged ()),
+			this,
+			SLOT (rebuild ()));
+
 	Ui_.Plotter_->setAxisAutoScale (QwtPlot::yLeft, false);
 	Ui_.Plotter_->setAxisScale (QwtPlot::yLeft, 0, 255);
 	Ui_.Plotter_->setAxisTitle (QwtPlot::yLeft, tr ("V"));
@@ -85,7 +90,7 @@ namespace
 	}
 }
 
-void Carex::Rebuild ()
+void Carex::rebuild ()
 {
 	ResizeFitter_->SetItem (nullptr);
 	Scene_.clear ();
@@ -95,7 +100,12 @@ void Carex::Rebuild ()
 	Ui_.FullView_->fitInView (item);
 	ResizeFitter_->SetItem (item);
 
-	const auto& stats = Profiler { Image_ } ();
+	const auto& area = Scene_.selectionArea ().boundingRect ();
+	const auto& img = area.width () * area.height () > 100 ?
+			Image_.copy (area.toRect ()) :
+			Image_;
+
+	const auto& stats = Profiler { img } ();
 
 	std::vector<double> xpoints;
 	auto firstPt = -(stats.Avg_.size () / 2.);
@@ -130,5 +140,5 @@ void Carex::openFile ()
 
 	Image_.swap (image);
 
-	Rebuild ();
+	rebuild ();
 }

@@ -39,7 +39,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QGraphicsView" name="FullView_">
+       <widget class="ImageSelectionView" name="FullView_">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>1</horstretch>
@@ -60,6 +60,9 @@
         </property>
         <property name="renderHints">
          <set>QPainter::Antialiasing|QPainter::HighQualityAntialiasing|QPainter::SmoothPixmapTransform|QPainter::TextAntialiasing</set>
+        </property>
+        <property name="dragMode">
+         <enum>QGraphicsView::RubberBandDrag</enum>
         </property>
        </widget>
       </item>
@@ -100,6 +103,11 @@
    <class>QwtPlot</class>
    <extends>QFrame</extends>
    <header>qwt_plot.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ImageSelectionView</class>
+   <extends>QGraphicsView</extends>
+   <header>imageselectionview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

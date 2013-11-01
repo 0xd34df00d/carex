@@ -8,12 +8,16 @@ set(CMAKE_AUTOMOC TRUE)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 find_package(Qwt REQUIRED)
 
-include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${QWT_INCLUDE_DIRS})
+include_directories(${QT_INCLUDES}
+		${CMAKE_CURRENT_BINARY_DIR}
+		${CMAKE_CURRENT_SOURCE_DIR}
+		${QWT_INCLUDE_DIRS})
 
 set(SRCS
 	main.cpp
 	carex.cpp
 	profiler.cpp
+	imageselectionview.cpp
 	)
 set(FORMS
 	carex.ui

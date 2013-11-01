@@ -3,6 +3,10 @@
 #include <QMainWindow>
 #include "ui_carex.h"
 
+class QwtPlotCurve;
+
+class ResizeEventFilter;
+
 class Carex : public QMainWindow
 {
 	Q_OBJECT
@@ -12,9 +16,14 @@ class Carex : public QMainWindow
 	QImage Image_;
 
 	QGraphicsScene Scene_;
+
+	ResizeEventFilter * const ResizeFitter_;
+
+	QwtPlotCurve * const AvgCurve_;
+	QwtPlotCurve * const MinCurve_;
+	QwtPlotCurve * const MaxCurve_;
 public:
 	Carex ();
-	virtual ~Carex ();
 private:
 	void Rebuild ();
 private slots:
